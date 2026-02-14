@@ -118,6 +118,17 @@ class UserPreferences(context: Context) : SharedPreferenceStore(
 		 */
 		var ac3Enabled = booleanPreference("pref_bitstream_ac3", true)
 
+		/* START OF RANFT CHANGES */
+		/**
+		 * Prefer AC3 over AAC
+		 */
+		var ac3Preferred = booleanPreference("prefer_ac3", false)
+
+		/**
+		 * Disable AAC
+		 */
+		var disable_aac = booleanPreference("disable_aac", false)
+
 		/* Live TV */
 		/**
 		 * Use direct play

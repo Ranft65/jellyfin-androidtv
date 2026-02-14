@@ -231,6 +231,25 @@ fun SettingsPlaybackAdvancedScreen() {
 			)
 		}
 
+		item {
+			var ac3Preferred by rememberPreference(userPreferences, UserPreferences.ac3Preferred)
+
+			ListButton(
+				headingContent = { Text(stringResource(R.string.lbl_prefer_ac3)) },
+				trailingContent = { Checkbox(checked = ac3Preferred) },
+				onClick = { ac3Preferred = !ac3Preferred }
+			)
+		}
+		item {
+			var disable_aac by rememberPreference(userPreferences, UserPreferences.disable_aac)
+
+			ListButton(
+				headingContent = { Text(stringResource(R.string.lbl_disable_aac)) },
+				trailingContent = { Checkbox(checked = disable_aac) },
+				onClick = { disable_aac = !disable_aac }
+			)
+		}
+
 		item { ListSection(headingContent = { Text(stringResource(R.string.pref_troubleshooting)) }) }
 
 		item {
