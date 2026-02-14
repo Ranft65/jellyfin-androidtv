@@ -84,6 +84,12 @@ fun createDeviceProfile(
 	isAC3Enabled = userPreferences[UserPreferences.ac3Enabled],
 	isAC3Preferred = userPreferences[UserPreferences.ac3Preferred],
 	is_disable_aac = userPreferences[UserPreferences.disable_aac],
+	is_disable_dts = userPreferences[UserPreferences.disable_dts],
+	is_disable_flac = userPreferences[UserPreferences.disable_flac],
+	is_disable_mp3 = userPreferences[UserPreferences.disable_mp3],
+	is_disable_opus = userPreferences[UserPreferences.disable_opus],
+	is_disable_truehd = userPreferences[UserPreferences.disable_truehd],
+	is_disable_vorbis = userPreferences[UserPreferences.disable_vorbis],
 	downMixAudio = userPreferences[UserPreferences.audioBehaviour] == AudioBehavior.DOWNMIX_TO_STEREO,
 	assDirectPlay = false,
 	pgsDirectPlay = userPreferences[UserPreferences.pgsDirectPlay],
@@ -92,24 +98,64 @@ fun createDeviceProfile(
 private fun createSupportedAudioCodecs(
 	isAC3Enabled: Boolean,
 	isAC3Preferred: Boolean,
-	is_disabled_aac: Boolean
+	is_disable_aac: Boolean,
+	is_disable_dts: Boolean,
+	is_disable_flac: Boolean,
+	is_disable_mp3: Boolean,
+	is_disable_opus: Boolean,
+	is_disable_truehd: Boolean,
+	is_disable_vorbis: Boolean
 ): Array<String> {
 
-	if (is_disabled_aac) return supportedAudioCodecs
+	var temparray = supportedAudioCodecs.copyOf()
+	
+	if (is_disable_aac)
+		temparray = temparray
 		.filterNot { it == Codec.Audio.AAC }
+		.filterNot { it == Codec.Audio.AAC_LATM }
 		.toTypedArray()
 
-	if (!isAC3Enabled) return supportedAudioCodecs
+	if (is_disable_dts)
+		temparray = temparray
+		.filterNot { it == Codec.Audio.DTS }
+		.toTypedArray()
+
+	if (is_disable_flac)
+		temparray = temparray
+		.filterNot { it == Codec.Audio.FLAC }
+		.toTypedArray()
+
+	if (is_disable_mp3)
+		temparray = temparray
+		.filterNot { it == Codec.Audio.MP3 }
+		.toTypedArray()		
+		
+	if (is_disable_opus)
+		temparray = temparray
+		.filterNot { it == Codec.Audio.OPUS }
+		.toTypedArray()
+
+	if (is_disable_truehd)
+		temparray = temparray
+		.filterNot { it == Codec.Audio.TRUEHD }
+		.toTypedArray()
+
+	if (is_disable_vorbis)
+		temparray = temparray
+		.filterNot { it == Codec.Audio.VORBIS }
+		.toTypedArray()		
+
+	if (!isAC3Enabled) return temparray
 		.filterNot { it == Codec.Audio.AC3 || it == Codec.Audio.EAC3 }
 		.toTypedArray()
 
-	if (isAC3Preferred) return supportedAudioCodecs
+	if (isAC3Preferred) temparray
 		.filterNot { it == Codec.Audio.AC3 }
 		.toMutableList()
 		.apply { add(0, Codec.Audio.AC3) }
 		.toTypedArray()
 
-	return supportedAudioCodecs
+	return temparray
 }
 
 fun createDeviceProfile(
@@ -118,12 +164,28 @@ fun createDeviceProfile(
 	isAC3Enabled: Boolean,
 	isAC3Preferred: Boolean,
 	is_disable_aac: Boolean,
+	is_disable_dts: Boolean,
+	is_disable_flac: Boolean,
+	is_disable_mp3: Boolean,	
+	is_disable_opus: Boolean,
+	is_disable_truehd: Boolean,
+	is_disable_vorbis: Boolean,	
 	downMixAudio: Boolean,
 	assDirectPlay: Boolean,
 	pgsDirectPlay: Boolean,
 ) = buildDeviceProfile {
 	val allowedAudioCodecs = if (downMixAudio) downmixSupportedAudioCodecs else {
-		createSupportedAudioCodecs(isAC3Enabled, isAC3Preferred, is_disable_aac)
+		createSupportedAudioCodecs(
+		isAC3Enabled,
+		isAC3Preferred,
+		is_disable_aac,
+		is_disable_dts,
+		is_disable_flac,
+		is_disable_mp3,
+		is_disable_opus,
+		is_disable_truehd,
+		is_disable_vorbis
+		)
 	}
 
 	val supportsHevc = mediaTest.supportsHevc()

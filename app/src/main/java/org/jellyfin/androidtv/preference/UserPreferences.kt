@@ -129,6 +129,36 @@ class UserPreferences(context: Context) : SharedPreferenceStore(
 		 */
 		var disable_aac = booleanPreference("disable_aac", false)
 
+		/**
+		 * Disable DTS	
+		 */
+		var disable_dts = booleanPreference("disable_dts", false)
+
+		/**
+		 * Disable FLAC
+		 */
+		var disable_flac = booleanPreference("disable_flac", false)
+
+		/**
+		 * Disable MP3
+		 */
+		var disable_mp3 = booleanPreference("disable_mp3", false)
+
+		/**
+		 * Disable OPUS
+		 */
+		var disable_opus = booleanPreference("disable_opus", false)
+
+		/**
+		 * Disable TRUEHD
+		 */
+		var disable_truehd = booleanPreference("disable_truehd", false)
+
+		/**
+		 * Disable VORBIS
+		 */
+		var disable_vorbis = booleanPreference("disable_vorbis", false)
+
 		/* Live TV */
 		/**
 		 * Use direct play

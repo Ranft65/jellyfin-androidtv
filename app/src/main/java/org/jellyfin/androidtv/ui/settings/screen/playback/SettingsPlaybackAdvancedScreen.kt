@@ -249,6 +249,66 @@ fun SettingsPlaybackAdvancedScreen() {
 				onClick = { disable_aac = !disable_aac }
 			)
 		}
+		
+		item {
+			var disable_dts by rememberPreference(userPreferences, UserPreferences.disable_dts)
+
+			ListButton(
+				headingContent = { Text(stringResource(R.string.lbl_disable_dts)) },
+				trailingContent = { Checkbox(checked = disable_dts) },
+				onClick = { disable_dts = !disable_dts }
+			)
+		}
+
+		item {
+			var disable_flac by rememberPreference(userPreferences, UserPreferences.disable_flac)
+
+			ListButton(
+				headingContent = { Text(stringResource(R.string.lbl_disable_flac)) },
+				trailingContent = { Checkbox(checked = disable_flac) },
+				onClick = { disable_flac = !disable_flac }
+			)
+		}
+
+		item {
+			var disable_mp3 by rememberPreference(userPreferences, UserPreferences.disable_mp3)
+
+			ListButton(
+				headingContent = { Text(stringResource(R.string.lbl_disable_mp3)) },
+				trailingContent = { Checkbox(checked = disable_mp3) },
+				onClick = { disable_mp3 = !disable_mp3 }
+			)
+		}
+
+		item {
+			var disable_opus by rememberPreference(userPreferences, UserPreferences.disable_opus)
+
+			ListButton(
+				headingContent = { Text(stringResource(R.string.lbl_disable_opus)) },
+				trailingContent = { Checkbox(checked = disable_opus) },
+				onClick = { disable_opus = !disable_opus }
+			)
+		}
+
+		item {
+			var disable_truehd by rememberPreference(userPreferences, UserPreferences.disable_truehd)
+
+			ListButton(
+				headingContent = { Text(stringResource(R.string.lbl_disable_truehd)) },
+				trailingContent = { Checkbox(checked = disable_truehd) },
+				onClick = { disable_truehd = !disable_truehd }
+			)
+		}
+
+		item {
+			var disable_vorbis by rememberPreference(userPreferences, UserPreferences.disable_vorbis)
+
+			ListButton(
+				headingContent = { Text(stringResource(R.string.lbl_disable_vorbis)) },
+				trailingContent = { Checkbox(checked = disable_vorbis) },
+				onClick = { disable_vorbis = !disable_vorbis }
+			)
+		}		
 
 		item { ListSection(headingContent = { Text(stringResource(R.string.pref_troubleshooting)) }) }
 
