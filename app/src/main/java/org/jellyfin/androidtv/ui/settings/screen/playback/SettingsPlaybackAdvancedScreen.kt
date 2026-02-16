@@ -220,7 +220,7 @@ fun SettingsPlaybackAdvancedScreen() {
 				onClick = { audioNightMode = !audioNightMode }
 			)
 		}
-
+		
 		item {
 			var ac3Enabled by rememberPreference(userPreferences, UserPreferences.ac3Enabled)
 
@@ -232,6 +232,17 @@ fun SettingsPlaybackAdvancedScreen() {
 		}
 
 		item {
+			var eac3Enabled by rememberPreference(userPreferences, UserPreferences.eac3Enabled)
+
+			ListButton(
+				headingContent = { Text(stringResource(R.string.lbl_bitstream_eac3)) },
+				trailingContent = { Checkbox(checked = eac3Enabled) },
+				onClick = { eac3Enabled = !eac3Enabled }
+			)
+		}		
+
+
+		item {
 			var ac3Preferred by rememberPreference(userPreferences, UserPreferences.ac3Preferred)
 
 			ListButton(
@@ -240,6 +251,7 @@ fun SettingsPlaybackAdvancedScreen() {
 				onClick = { ac3Preferred = !ac3Preferred }
 			)
 		}
+						
 		item {
 			var disable_aac by rememberPreference(userPreferences, UserPreferences.disable_aac)
 
@@ -249,7 +261,37 @@ fun SettingsPlaybackAdvancedScreen() {
 				onClick = { disable_aac = !disable_aac }
 			)
 		}
-		
+
+		item {
+			var disable_aac_latm by rememberPreference(userPreferences, UserPreferences.disable_aac_latm)
+
+			ListButton(
+				headingContent = { Text(stringResource(R.string.lbl_disable_aac_latm)) },
+				trailingContent = { Checkbox(checked = disable_aac_latm) },
+				onClick = { disable_aac_latm = !disable_aac_latm }
+			)
+		}		
+
+		item {
+			var disable_alac by rememberPreference(userPreferences, UserPreferences.disable_alac)
+
+			ListButton(
+				headingContent = { Text(stringResource(R.string.lbl_disable_alac)) },
+				trailingContent = { Checkbox(checked = disable_alac) },
+				onClick = { disable_alac = !disable_alac }
+			)
+		}
+
+		item {
+			var disable_dca by rememberPreference(userPreferences, UserPreferences.disable_dca)
+
+			ListButton(
+				headingContent = { Text(stringResource(R.string.lbl_disable_dca)) },
+				trailingContent = { Checkbox(checked = disable_dca) },
+				onClick = { disable_dca = !disable_dca }
+			)
+		}
+
 		item {
 			var disable_dts by rememberPreference(userPreferences, UserPreferences.disable_dts)
 
@@ -259,7 +301,7 @@ fun SettingsPlaybackAdvancedScreen() {
 				onClick = { disable_dts = !disable_dts }
 			)
 		}
-
+		
 		item {
 			var disable_flac by rememberPreference(userPreferences, UserPreferences.disable_flac)
 
@@ -267,6 +309,26 @@ fun SettingsPlaybackAdvancedScreen() {
 				headingContent = { Text(stringResource(R.string.lbl_disable_flac)) },
 				trailingContent = { Checkbox(checked = disable_flac) },
 				onClick = { disable_flac = !disable_flac }
+			)
+		}
+
+		item {
+			var disable_mlp by rememberPreference(userPreferences, UserPreferences.disable_mlp)
+
+			ListButton(
+				headingContent = { Text(stringResource(R.string.lbl_disable_mlp)) },
+				trailingContent = { Checkbox(checked = disable_mlp) },
+				onClick = { disable_mlp = !disable_mlp }
+			)
+		}
+
+		item {
+			var disable_mp2 by rememberPreference(userPreferences, UserPreferences.disable_mp2)
+
+			ListButton(
+				headingContent = { Text(stringResource(R.string.lbl_disable_mp2)) },
+				trailingContent = { Checkbox(checked = disable_mp2) },
+				onClick = { disable_mp2 = !disable_mp2 }
 			)
 		}
 
@@ -287,6 +349,16 @@ fun SettingsPlaybackAdvancedScreen() {
 				headingContent = { Text(stringResource(R.string.lbl_disable_opus)) },
 				trailingContent = { Checkbox(checked = disable_opus) },
 				onClick = { disable_opus = !disable_opus }
+			)
+		}
+
+		item {
+			var disable_pcm by rememberPreference(userPreferences, UserPreferences.disable_pcm)
+
+			ListButton(
+				headingContent = { Text(stringResource(R.string.lbl_disable_pcm)) },
+				trailingContent = { Checkbox(checked = disable_pcm) },
+				onClick = { disable_pcm = !disable_pcm }
 			)
 		}
 

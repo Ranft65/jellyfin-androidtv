@@ -116,9 +116,13 @@ class UserPreferences(context: Context) : SharedPreferenceStore(
 		/**
 		 * Enable AC3
 		 */
-		var ac3Enabled = booleanPreference("pref_bitstream_ac3", true)
+		var ac3Enabled = booleanPreference("enable_ac3", true)
 
-		/* START OF RANFT CHANGES */
+		/**
+		 * Enable EAC3
+		 */
+		var eac3Enabled = booleanPreference("enable_eac3", true)
+
 		/**
 		 * Prefer AC3 over AAC
 		 */
@@ -128,6 +132,21 @@ class UserPreferences(context: Context) : SharedPreferenceStore(
 		 * Disable AAC
 		 */
 		var disable_aac = booleanPreference("disable_aac", false)
+
+		/**
+		 * Disable AAC_LATM
+		 */
+		var disable_aac_latm = booleanPreference("disable_aac_latm", false)
+
+		/**
+		 * Disable ALAC
+		 */
+		var disable_alac = booleanPreference("disable_alac", false)
+		
+		/**
+		 * Disable DCA
+		 */
+		var disable_dca = booleanPreference("disable_dca", false)		
 
 		/**
 		 * Disable DTS	
@@ -140,6 +159,16 @@ class UserPreferences(context: Context) : SharedPreferenceStore(
 		var disable_flac = booleanPreference("disable_flac", false)
 
 		/**
+		 * Disable MLP
+		 */
+		var disable_mlp = booleanPreference("disable_mlp", false)
+
+		/**
+		 * Disable MP2
+		 */
+		var disable_mp2 = booleanPreference("disable_mp2", false)
+
+		/**
 		 * Disable MP3
 		 */
 		var disable_mp3 = booleanPreference("disable_mp3", false)
@@ -148,6 +177,11 @@ class UserPreferences(context: Context) : SharedPreferenceStore(
 		 * Disable OPUS
 		 */
 		var disable_opus = booleanPreference("disable_opus", false)
+
+		/**
+		 * Disable PCM
+		 */
+		var disable_pcm = booleanPreference("disable_pcm", false)
 
 		/**
 		 * Disable TRUEHD
