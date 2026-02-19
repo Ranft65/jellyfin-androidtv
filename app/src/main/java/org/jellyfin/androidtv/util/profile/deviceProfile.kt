@@ -82,19 +82,19 @@ fun createDeviceProfile(
 	mediaTest = MediaCodecCapabilitiesTest(context),
 	maxBitrate = userPreferences.getMaxBitrate(),
 	isAC3Enabled = userPreferences[UserPreferences.ac3Enabled],
-	isEAC3Enabled = userPreferences[UserPreferences.eac3Enabled],	
+	isEAC3Enabled = userPreferences[UserPreferences.eac3Enabled],
 	isAC3Preferred = userPreferences[UserPreferences.ac3Preferred],
 	is_disable_aac = userPreferences[UserPreferences.disable_aac],
 	is_disable_aac_latm = userPreferences[UserPreferences.disable_aac_latm],
 	is_disable_alac = userPreferences[UserPreferences.disable_alac],
-	is_disable_dca = userPreferences[UserPreferences.disable_dca],	
+	is_disable_dca = userPreferences[UserPreferences.disable_dca],
 	is_disable_dts = userPreferences[UserPreferences.disable_dts],
 	is_disable_flac = userPreferences[UserPreferences.disable_flac],
 	is_disable_mlp = userPreferences[UserPreferences.disable_mlp],
-	is_disable_mp2 = userPreferences[UserPreferences.disable_mp2],	
+	is_disable_mp2 = userPreferences[UserPreferences.disable_mp2],
 	is_disable_mp3 = userPreferences[UserPreferences.disable_mp3],
 	is_disable_opus = userPreferences[UserPreferences.disable_opus],
-	is_disable_pcm = userPreferences[UserPreferences.disable_pcm],	
+	is_disable_pcm = userPreferences[UserPreferences.disable_pcm],
 	is_disable_truehd = userPreferences[UserPreferences.disable_truehd],
 	is_disable_vorbis = userPreferences[UserPreferences.disable_vorbis],
 	downMixAudio = userPreferences[UserPreferences.audioBehaviour] == AudioBehavior.DOWNMIX_TO_STEREO,
@@ -113,7 +113,7 @@ private fun createSupportedAudioCodecs(
 	is_disable_dts: Boolean,
 	is_disable_flac: Boolean,
 	is_disable_mlp: Boolean,
-	is_disable_mp2: Boolean,	
+	is_disable_mp2: Boolean,
 	is_disable_mp3: Boolean,
 	is_disable_opus: Boolean,
 	is_disable_pcm: Boolean,
@@ -122,7 +122,7 @@ private fun createSupportedAudioCodecs(
 ): Array<String> {
 
 	var temparray = supportedAudioCodecs.copyOf()
-	
+
 	if (is_disable_aac)
 		temparray = temparray
 		.filterNot { it == Codec.Audio.AAC }
@@ -132,12 +132,12 @@ private fun createSupportedAudioCodecs(
 		temparray = temparray
 		.filterNot { it == Codec.Audio.AAC_LATM }
 		.toTypedArray()
-		
+
 	if (is_disable_alac)
 		temparray = temparray
 		.filterNot { it == Codec.Audio.ALAC }
 		.toTypedArray()
-		
+
 	if (is_disable_dca)
 		temparray = temparray
 		.filterNot { it == Codec.Audio.DCA }
@@ -152,22 +152,22 @@ private fun createSupportedAudioCodecs(
 		temparray = temparray
 		.filterNot { it == Codec.Audio.FLAC }
 		.toTypedArray()
-		
+
 	if (is_disable_mlp)
 		temparray = temparray
 		.filterNot { it == Codec.Audio.MLP }
-		.toTypedArray()	
+		.toTypedArray()
 
 	if (is_disable_mp2)
 		temparray = temparray
 		.filterNot { it == Codec.Audio.MP2 }
-		.toTypedArray()	
+		.toTypedArray()
 
 	if (is_disable_mp3)
 		temparray = temparray
 		.filterNot { it == Codec.Audio.MP3 }
-		.toTypedArray()		
-		
+		.toTypedArray()
+
 	if (is_disable_opus)
 		temparray = temparray
 		.filterNot { it == Codec.Audio.OPUS }
@@ -179,8 +179,8 @@ private fun createSupportedAudioCodecs(
 		.filterNot { it == Codec.Audio.PCM_MULAW }
 		.filterNot { it == Codec.Audio.PCM_S16LE }
 		.filterNot { it == Codec.Audio.PCM_S20LE }
-		.filterNot { it == Codec.Audio.PCM_S24LE }		
-		.toTypedArray()	
+		.filterNot { it == Codec.Audio.PCM_S24LE }
+		.toTypedArray()
 
 	if (is_disable_truehd)
 		temparray = temparray
@@ -190,17 +190,20 @@ private fun createSupportedAudioCodecs(
 	if (is_disable_vorbis)
 		temparray = temparray
 		.filterNot { it == Codec.Audio.VORBIS }
-		.toTypedArray()		
+		.toTypedArray()
 
-	if (!isAC3Enabled) return temparray
+	if (!isAC3Enabled)
+		temparray = temparray
 		.filterNot { it == Codec.Audio.AC3 }
 		.toTypedArray()
-		
-	if (!isEAC3Enabled) return temparray
+
+	if (!isEAC3Enabled)
+		temparray = temparray
 		.filterNot { it == Codec.Audio.EAC3 }
 		.toTypedArray()
 
-	if (isAC3Preferred) temparray
+	if (isAC3Preferred)
+		temparray = temparray
 		.filterNot { it == Codec.Audio.AC3 }
 		.toMutableList()
 		.apply { add(0, Codec.Audio.AC3) }
@@ -222,12 +225,12 @@ fun createDeviceProfile(
 	is_disable_dts: Boolean,
 	is_disable_flac: Boolean,
 	is_disable_mlp: Boolean,
-	is_disable_mp2: Boolean,	
+	is_disable_mp2: Boolean,
 	is_disable_mp3: Boolean,
 	is_disable_opus: Boolean,
 	is_disable_pcm: Boolean,
 	is_disable_truehd: Boolean,
-	is_disable_vorbis: Boolean,	
+	is_disable_vorbis: Boolean,
 	downMixAudio: Boolean,
 	assDirectPlay: Boolean,
 	pgsDirectPlay: Boolean,
@@ -244,10 +247,10 @@ fun createDeviceProfile(
 		is_disable_dts,
 		is_disable_flac,
 		is_disable_mlp,
-		is_disable_mp2,	
+		is_disable_mp2,
 		is_disable_mp3,
 		is_disable_opus,
-		is_disable_pcm,		
+		is_disable_pcm,
 		is_disable_truehd,
 		is_disable_vorbis
 		)
