@@ -5,6 +5,7 @@ import androidx.preference.PreferenceManager
 import org.jellyfin.androidtv.preference.UserPreferences.Companion.screensaverInAppEnabled
 import org.jellyfin.androidtv.preference.constant.AppTheme
 import org.jellyfin.androidtv.preference.constant.AudioBehavior
+import org.jellyfin.androidtv.preference.constant.PreferredAudioCodecs
 import org.jellyfin.androidtv.preference.constant.ClockBehavior
 import org.jellyfin.androidtv.preference.constant.NextUpBehavior
 import org.jellyfin.androidtv.preference.constant.RefreshRateSwitchingBehavior
@@ -114,6 +115,12 @@ class UserPreferences(context: Context) : SharedPreferenceStore(
 		var audioNightMode = enumPreference("audio_night_mode", false)
 
 		/**
+		 * Preferred Audio Codec
+		 */
+
+		var preferred_audio_codec = enumPreference("preferred_audio_codec", PreferredAudioCodecs.AAC)
+
+		/**
 		 * Enable AC3
 		 */
 		var ac3Enabled = booleanPreference("enable_ac3", true)
@@ -122,11 +129,6 @@ class UserPreferences(context: Context) : SharedPreferenceStore(
 		 * Enable EAC3
 		 */
 		var eac3Enabled = booleanPreference("enable_eac3", true)
-
-		/**
-		 * Prefer AC3 over AAC
-		 */
-		var ac3Preferred = booleanPreference("prefer_ac3", false)
 
 		/**
 		 * Disable AAC
@@ -142,14 +144,14 @@ class UserPreferences(context: Context) : SharedPreferenceStore(
 		 * Disable ALAC
 		 */
 		var disable_alac = booleanPreference("disable_alac", false)
-		
+
 		/**
 		 * Disable DCA
 		 */
-		var disable_dca = booleanPreference("disable_dca", false)		
+		var disable_dca = booleanPreference("disable_dca", false)
 
 		/**
-		 * Disable DTS	
+		 * Disable DTS
 		 */
 		var disable_dts = booleanPreference("disable_dts", false)
 
@@ -181,7 +183,11 @@ class UserPreferences(context: Context) : SharedPreferenceStore(
 		/**
 		 * Disable PCM
 		 */
-		var disable_pcm = booleanPreference("disable_pcm", false)
+		var disable_pcm_alaw = booleanPreference("disable_pcm_alaw", false)
+		var disable_pcm_mulaw = booleanPreference("disable_pcm_mulaw", false)
+		var disable_pcm_s16le = booleanPreference("disable_pcm_s16le", false)
+		var disable_pcm_s20le = booleanPreference("disable_pcm_s20le", false)
+		var disable_pcm_s24le = booleanPreference("disable_pcm_s24le", false)
 
 		/**
 		 * Disable TRUEHD
