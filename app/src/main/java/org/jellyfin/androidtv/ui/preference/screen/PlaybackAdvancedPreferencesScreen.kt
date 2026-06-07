@@ -16,6 +16,7 @@ import org.jellyfin.androidtv.ui.preference.dsl.OptionsFragment
 import org.jellyfin.androidtv.ui.preference.dsl.action
 import org.jellyfin.androidtv.ui.preference.dsl.checkbox
 import org.jellyfin.androidtv.ui.preference.dsl.enum
+import org.jellyfin.androidtv.ui.preference.dsl.link
 import org.jellyfin.androidtv.ui.preference.dsl.list
 import org.jellyfin.androidtv.ui.preference.dsl.optionsScreen
 import org.jellyfin.androidtv.ui.preference.dsl.seekbar
@@ -132,6 +133,23 @@ class PlaybackAdvancedPreferencesScreen : OptionsFragment() {
 				setTitle(R.string.lbl_bitstream_ac3)
 				setContent(R.string.desc_bitstream_ac3)
 				bind(userPreferences, UserPreferences.ac3Enabled)
+			}
+
+			checkbox {
+				setTitle(R.string.lbl_bitstream_aac)
+				setContent(R.string.desc_bitstream_ac3)
+				bind(userPreferences, UserPreferences.aacEnabled)
+			}
+
+		}
+
+		category {
+			setTitle(R.string.lbl_preferred_audio_codecs)
+
+			link {
+				setTitle(R.string.lbl_preferred_audio_codecs)
+				icon = R.drawable.ic_more
+				withFragment<SettingsPlaybackPreferredAudioCodecScreen>()
 			}
 		}
 

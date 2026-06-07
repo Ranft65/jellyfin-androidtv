@@ -125,6 +125,11 @@ class UserPreferences(context: Context) : SharedPreferenceStore(
 		 */
 		var ac3Enabled = booleanPreference("pref_bitstream_ac3", true)
 
+		/**
+		 * Enable AAC
+		 */
+		var aacEnabled = booleanPreference("pref_bitstream_aac", true)
+
 		/* Live TV */
 		/**
 		 * Use direct play
