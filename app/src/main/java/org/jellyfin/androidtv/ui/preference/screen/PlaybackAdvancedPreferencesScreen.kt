@@ -27,6 +27,7 @@ import org.jellyfin.sdk.api.client.extensions.clientLogApi
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import timber.log.Timber
+import org.jellyfin.androidtv.ui.preference.screen.SettingsPlaybackPreferredAudioCodecScreen
 
 class PlaybackAdvancedPreferencesScreen : OptionsFragment() {
 	private val api: ApiClient by inject()
@@ -149,7 +150,8 @@ class PlaybackAdvancedPreferencesScreen : OptionsFragment() {
 			link {
 				setTitle(R.string.lbl_preferred_audio_codecs)
 				icon = R.drawable.ic_more
-				withFragment<SettingsPlaybackPreferredAudioCodecScreen>()
+				//withFragment<SettingsPlaybackPreferredAudioCodecScreen>()
+				targetFragment { SettingsPlaybackPreferredAudioCodecScreen() }
 			}
 		}
 
@@ -189,4 +191,10 @@ class PlaybackAdvancedPreferencesScreen : OptionsFragment() {
 			}
 		}
 	}
+}
+
+import androidx.fragment.app.Fragment
+import org.jellyfin.androidtv.ui.preference.dsl.LinkBuilder
+inline fun <reified T : Fragment> LinkBuilder.targetFragment(crossinline provider: () -> T) {
+	this.withFragment<T>()
 }

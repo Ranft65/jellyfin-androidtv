@@ -15,6 +15,7 @@ import org.jellyfin.sdk.model.api.SubtitleDeliveryMethod
 import org.jellyfin.sdk.model.api.VideoRangeType
 import org.jellyfin.sdk.model.deviceprofile.DeviceProfileBuilder
 import org.jellyfin.sdk.model.deviceprofile.buildDeviceProfile
+import kotlin.collections.toTypedArray
 import kotlin.math.roundToInt
 
 private val downmixSupportedAudioCodecs = arrayOf(
@@ -23,7 +24,7 @@ private val downmixSupportedAudioCodecs = arrayOf(
 	Codec.Audio.MP3,
 )
 
-private val supportedAudioCodecs = arrayOf(
+public val supportedAudioCodecs_default = arrayOf(
 	Codec.Audio.AAC,
 	Codec.Audio.AAC_LATM,
 	Codec.Audio.AC3,
@@ -60,9 +61,9 @@ fun createDeviceProfile(
 	userPreferences: UserPreferences,
 	serverVersion: ServerVersion,
 ) = createDeviceProfile(
+	userPreferences,
 	mediaTest = MediaCodecCapabilitiesTest(context),
 	maxBitrate = userPreferences.getMaxBitrate(),
-	isAC3Enabled = userPreferences[UserPreferences.ac3Enabled],
 	downMixAudio = userPreferences[UserPreferences.audioBehaviour] == AudioBehavior.DOWNMIX_TO_STEREO,
 	assDirectPlay = false,
 	pgsDirectPlay = userPreferences[UserPreferences.pgsDirectPlay],
@@ -70,9 +71,9 @@ fun createDeviceProfile(
 )
 
 fun createDeviceProfile(
+	userPreferences: UserPreferences,
 	mediaTest: MediaCodecCapabilitiesTest,
 	maxBitrate: Int,
-	isAC3Enabled: Boolean,
 	downMixAudio: Boolean,
 	assDirectPlay: Boolean,
 	pgsDirectPlay: Boolean,
@@ -80,8 +81,7 @@ fun createDeviceProfile(
 ) = buildDeviceProfile {
 	val allowedAudioCodecs = when {
 		downMixAudio -> downmixSupportedAudioCodecs
-		!isAC3Enabled -> supportedAudioCodecs.filterNot { it == Codec.Audio.EAC3 || it == Codec.Audio.AC3 }.toTypedArray()
-		else -> supportedAudioCodecs
+		else -> getSupportedAudioCodecs(userPreferences)
 	}
 
 	val supportsHevc = mediaTest.supportsHevc()
@@ -513,4 +513,36 @@ private fun DeviceProfileBuilder.subtitleProfile(
 	if (external) subtitleProfile(format, SubtitleDeliveryMethod.EXTERNAL)
 	if (hls) subtitleProfile(format, SubtitleDeliveryMethod.HLS)
 	if (encode) subtitleProfile(format, SubtitleDeliveryMethod.ENCODE)
+}
+
+private fun getSupportedAudioCodecs(userPreferences: UserPreferences):Array<String>
+{
+	var tempstring : String
+	var temparray : Array<String>
+	var isAC3Enabled: Boolean
+	var isAACEnabled: Boolean
+
+	tempstring = userPreferences[UserPreferences.userdefinedaudiocodecs];
+	if (tempstring.count { !it.isWhitespace() } == 0)
+	{
+		temparray = supportedAudioCodecs_default;
+	} else {
+		temparray = tempstring.split(",").toTypedArray()
+	}
+
+	isAC3Enabled = userPreferences[UserPreferences.ac3Enabled],
+	isAACEnabled = userPreferences[UserPreferences.aacEnabled],
+
+	If (!isAC3Enabled)
+	{
+		temparray = temparray.filterNot { it == Codec.Audio.EAC3 || it == Codec.Audio.AC3 }.toTypedArray()
+	}
+
+	If (!isAACEnabled)
+	{
+		temparray = temparray.filterNot { it == Codec.Audio.AAC || it == Codec.Audio.AAC_LTM }.toTypedArray()
+	}
+
+	return (temparray)
+
 }
